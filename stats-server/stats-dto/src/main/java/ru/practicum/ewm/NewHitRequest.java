@@ -1,5 +1,6 @@
 package ru.practicum.ewm;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,5 +21,6 @@ public class NewHitRequest {
     @NotBlank(message = "Поле ip должно быть заполнено")
     String ip;
 
-    LocalDateTime timestamp;
+    @NotBlank(message = "Поле timestamp должно быть заполнено")
+    String timestamp;
 }

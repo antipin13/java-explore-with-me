@@ -11,6 +11,7 @@ import ru.practicum.ewm.HitDto;
 import ru.practicum.ewm.NewHitRequest;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Component
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 public class StatsClient {
     final RestTemplate restTemplate;
     String baseUrl;
+    final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public void sendHit(HttpServletRequest request) {
         String uri = request.getRequestURI();
@@ -42,7 +44,7 @@ public class StatsClient {
                 .app("ewm-main-service")
                 .ip(ip)
                 .uri(uri)
-                .timestamp(LocalDateTime.now())
+                .timestamp(LocalDateTime.now().format(formatter))
                 .build();
     }
 }

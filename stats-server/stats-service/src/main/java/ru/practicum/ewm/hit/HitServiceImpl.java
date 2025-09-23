@@ -9,6 +9,7 @@ import ru.practicum.ewm.HitDto;
 import ru.practicum.ewm.HitStatsDto;
 import ru.practicum.ewm.NewHitRequest;
 import ru.practicum.ewm.StatsRequestParam;
+import ru.practicum.ewm.exception.BadRequestException;
 import ru.practicum.ewm.exception.NotFoundException;
 
 import java.time.LocalDateTime;
@@ -39,6 +40,11 @@ public class HitServiceImpl implements HitService {
     public List<HitStatsDto> getHitsStats(StatsRequestParam statsRequestParam) {
         LocalDateTime start = LocalDateTime.parse(statsRequestParam.getStart(), formatter);
         LocalDateTime end = LocalDateTime.parse(statsRequestParam.getEnd(), formatter);
+
+        if (start.isAfter(end)) {
+            throw new BadRequestException("Дата конца не может быть раньше даты начала");
+        }
+
         List<String> uris = statsRequestParam.getUris();
         Boolean unique = statsRequestParam.getUnique();
 

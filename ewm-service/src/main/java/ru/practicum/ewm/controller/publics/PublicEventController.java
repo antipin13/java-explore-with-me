@@ -35,7 +35,8 @@ public class PublicEventController {
                                                    @RequestParam(defaultValue = "false") Boolean onlyAvailable,
                                                    @RequestParam(defaultValue = "EVENT_DATE") String sort,
                                                    @RequestParam(defaultValue = "0") int from,
-                                                   @RequestParam(defaultValue = "10") int size) {
+                                                   @RequestParam(defaultValue = "10") int size,
+                                                   HttpServletRequest request) {
        LocalDateTime start = null;
        LocalDateTime end = null;
         if (rangeStart != null) {
@@ -60,7 +61,7 @@ public class PublicEventController {
         PublicEventSearchCriteria.validateCriteria(criteria);
 
         log.info("Параметры запроса - {}", criteria.toString());
-        return eventService.getEventsByCriteria(criteria);
+        return eventService.getEventsByCriteria(criteria, request);
     }
 
     @GetMapping("/{id}")

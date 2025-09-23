@@ -32,8 +32,8 @@ public class HitController {
     @GetMapping
     @RequestMapping("/stats")
     @ResponseStatus(HttpStatus.OK)
-    public List<HitStatsDto> getHitsStats(@RequestParam String start,
-                                          @RequestParam String end,
+    public List<HitStatsDto> getHitsStats(@RequestParam(required = true) String start,
+                                          @RequestParam(required = true) String end,
                                           @RequestParam(required = false) List<String> uris,
                                           @RequestParam(required = false, defaultValue = "false") Boolean unique) {
         StatsRequestParam statsRequestParam = StatsRequestParam.builder()

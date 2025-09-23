@@ -134,7 +134,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventShortDto> getEventsByCriteria(PublicEventSearchCriteria criteria) {
+    public List<EventShortDto> getEventsByCriteria(PublicEventSearchCriteria criteria, HttpServletRequest request) {
         LocalDateTime start = criteria.getRangeStart() != null ? criteria.getRangeStart() : LocalDateTime.now();
         LocalDateTime end = criteria.getRangeEnd() != null ? criteria.getRangeEnd() : LocalDateTime.now().plusYears(100);
 
@@ -154,6 +154,8 @@ public class EventServiceImpl implements EventService {
                             event.getConfirmedRequests() < event.getParticipantLimit())
                     .collect(Collectors.toList());
         }
+
+        statsClient.sendHit(request);
 
         return events.stream()
                 .map(eventMapper::toEventShortDto)

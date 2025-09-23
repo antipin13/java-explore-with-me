@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.practicum.ewm.HitDto;
 import ru.practicum.ewm.NewHitRequest;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Component
@@ -17,7 +18,7 @@ public class HitMapper {
                 .app(request.getApp())
                 .uri(request.getUri())
                 .ip(request.getIp())
-                .timestamp(request.getTimestamp())
+                .timestamp(LocalDateTime.parse(request.getTimestamp(), formatter))
                 .build();
     }
 

@@ -20,7 +20,7 @@ public interface EventService {
 
     List<EventDto> getEventsByCriteria(AdminEventSearchCriteria criteria);
 
-    List<EventShortDto> getEventsByCriteria(PublicEventSearchCriteria criteria);
+    List<EventShortDto> getEventsByCriteria(PublicEventSearchCriteria criteria, HttpServletRequest request);
 
     EventDto getEventById(Long id, HttpServletRequest request);
 }
