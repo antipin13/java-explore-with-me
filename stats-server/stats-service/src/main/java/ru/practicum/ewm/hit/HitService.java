@@ -11,4 +11,6 @@ public interface HitService {
     HitDto saveHit(NewHitRequest request);
 
     List<HitStatsDto> getHitsStats(StatsRequestParam statsRequestParam);
+
+    Long countViewsByIp(String uri);
 }

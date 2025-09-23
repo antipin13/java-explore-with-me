@@ -1,6 +1,6 @@
 package ru.practicum.ewm.hit;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,12 +20,11 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HitController {
     final HitServiceImpl hitService;
-    ObjectMapper mapper = new ObjectMapper();
 
     @PostMapping
     @RequestMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)
-    public HitDto create(@RequestBody NewHitRequest request) {
+    public HitDto create(@RequestBody @Valid NewHitRequest request) {
         log.info("Запрос на добавление статистики - {}", request);
         return hitService.saveHit(request);
     }
@@ -45,5 +44,12 @@ public class HitController {
                 .build();
 
         return hitService.getHitsStats(statsRequestParam);
+    }
+
+    @GetMapping
+    @RequestMapping("/stats/uri")
+    @ResponseStatus(HttpStatus.OK)
+    public Long getHitsStats(@RequestParam String uri) {
+        return hitService.countViewsByIp(uri);
     }
 }

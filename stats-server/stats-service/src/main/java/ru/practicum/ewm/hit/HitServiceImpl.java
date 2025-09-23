@@ -9,7 +9,7 @@ import ru.practicum.ewm.HitDto;
 import ru.practicum.ewm.HitStatsDto;
 import ru.practicum.ewm.NewHitRequest;
 import ru.practicum.ewm.StatsRequestParam;
-import ru.practicum.ewm.hit.exception.NotFoundException;
+import ru.practicum.ewm.exception.NotFoundException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -86,6 +86,11 @@ public class HitServiceImpl implements HitService {
         listStats.sort(Comparator.comparingLong(HitStatsDto::getHits).reversed());
 
         return listStats;
+    }
+
+    @Override
+    public Long countViewsByIp(String uri) {
+        return hitRepository.countDistinctIpsByUri(uri);
     }
 
     private List<Hit> getHitsOrThrow(String uri) {
