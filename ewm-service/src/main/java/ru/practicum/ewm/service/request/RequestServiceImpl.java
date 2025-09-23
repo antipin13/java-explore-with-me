@@ -42,7 +42,7 @@ public class RequestServiceImpl implements RequestService {
             throw new ConflictException(String.format("Событие с ID - %d не опубликованно", eventId));
         }
 
-        if (userId == event.getInitiator().getId()) {
+        if (userId.equals(event.getInitiator().getId())) {
             throw new ConflictException(String.format("Пользователь с ID - %d не может участвовать в мероприятии с ID - %d, поскольку является инициатором", userId, eventId));
         }
 
@@ -124,11 +124,6 @@ public class RequestServiceImpl implements RequestService {
         List<Long> requestIds = request.getRequestIds();
         RequestStatus newStatus = request.getStatus();
         List<Request> requests = requestRepository.findByIdIn(requestIds);
-
-        /*if (event.getParticipantLimit() > 0 && event.getRequestModeration() &&
-                event.getConfirmedRequests() >= event.getParticipantLimit()) {
-            throw new ConflictException(String.format("Достигнут лимит по заявкам на событие с ID - %d", eventId));
-        }*/
 
         List<RequestDto> confirmedRequests = new ArrayList<>();
         List<RequestDto> rejectedRequests = new ArrayList<>();
