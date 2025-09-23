@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 public class StatsClient {
     final RestTemplate restTemplate;
     String baseUrl;
-    final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public void sendHit(HttpServletRequest request) {
         String uri = request.getRequestURI();
