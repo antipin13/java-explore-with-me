@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class NewHitRequest {
-    @NotBlank(message = "Поле app должно быть заполнено")
+    @NotBlank(message = "Поле uri должно быть заполнено")
     String app;
 
     @NotBlank(message = "Поле uri должно быть заполнено")

@@ -1,6 +1,6 @@
 package ru.practicum.ewm.hit;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,12 +20,11 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HitController {
     final HitServiceImpl hitService;
-    ObjectMapper mapper = new ObjectMapper();
 
     @PostMapping
     @RequestMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)
-    public HitDto create(@RequestBody NewHitRequest request) {
+    public HitDto create(@RequestBody @Valid NewHitRequest request) {
         log.info("Запрос на добавление статистики - {}", request);
         return hitService.saveHit(request);
     }
@@ -33,8 +32,8 @@ public class HitController {
     @GetMapping
     @RequestMapping("/stats")
     @ResponseStatus(HttpStatus.OK)
-    public List<HitStatsDto> getHitsStats(@RequestParam String start,
-                                          @RequestParam String end,
+    public List<HitStatsDto> getHitsStats(@RequestParam(required = true) String start,
+                                          @RequestParam(required = true) String end,
                                           @RequestParam(required = false) List<String> uris,
                                           @RequestParam(required = false, defaultValue = "false") Boolean unique) {
         StatsRequestParam statsRequestParam = StatsRequestParam.builder()
@@ -45,5 +44,12 @@ public class HitController {
                 .build();
 
         return hitService.getHitsStats(statsRequestParam);
+    }
+
+    @GetMapping
+    @RequestMapping("/stats/uri")
+    @ResponseStatus(HttpStatus.OK)
+    public Long getHitsStats(@RequestParam String uri) {
+        return hitService.countViewsByIp(uri);
     }
 }

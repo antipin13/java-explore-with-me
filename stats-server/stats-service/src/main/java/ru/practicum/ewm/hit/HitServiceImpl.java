@@ -9,7 +9,8 @@ import ru.practicum.ewm.HitDto;
 import ru.practicum.ewm.HitStatsDto;
 import ru.practicum.ewm.NewHitRequest;
 import ru.practicum.ewm.StatsRequestParam;
-import ru.practicum.ewm.hit.exception.NotFoundException;
+import ru.practicum.ewm.exception.BadRequestException;
+import ru.practicum.ewm.exception.NotFoundException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -39,6 +40,11 @@ public class HitServiceImpl implements HitService {
     public List<HitStatsDto> getHitsStats(StatsRequestParam statsRequestParam) {
         LocalDateTime start = LocalDateTime.parse(statsRequestParam.getStart(), formatter);
         LocalDateTime end = LocalDateTime.parse(statsRequestParam.getEnd(), formatter);
+
+        if (start.isAfter(end)) {
+            throw new BadRequestException("Дата конца не может быть раньше даты начала");
+        }
+
         List<String> uris = statsRequestParam.getUris();
         Boolean unique = statsRequestParam.getUnique();
 
@@ -86,6 +92,11 @@ public class HitServiceImpl implements HitService {
         listStats.sort(Comparator.comparingLong(HitStatsDto::getHits).reversed());
 
         return listStats;
+    }
+
+    @Override
+    public Long countViewsByIp(String uri) {
+        return hitRepository.countDistinctIpsByUri(uri);
     }
 
     private List<Hit> getHitsOrThrow(String uri) {

@@ -1,4 +1,4 @@
-package ru.practicum.ewm.hit.exception;
+package ru.practicum.ewm.exception;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
