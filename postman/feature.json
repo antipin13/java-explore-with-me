@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "cfbb2cfc-0e98-4546-8078-2a065fdb179e",
-		"name": "Test Explore With Me - feature rating",
+		"_postman_id": "2b8fb7f1-10c9-4d4f-96c4-9f26e6d6b83c",
+		"name": "Test Explore With Me - feature rating Copy 2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "44812462"
 	},
@@ -13,11 +13,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Сохраняем ID категории",
+							"var response = pm.response.json();",
+							"pm.environment.set(\"category_id\", response.id);",
+							"console.log(\"Category ID saved: \" + pm.environment.get(\"category_id\"));"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -26,10 +31,15 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Концерты\"\r\n}",
+					"raw": "{\n  \"name\": \"Концерты\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -37,12 +47,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/admin/categories",
-					"protocol": "http",
+					"raw": "{{base_url}}/admin/categories",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"admin",
 						"categories"
@@ -58,11 +66,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Сохраняем ID пользователя 1",
+							"var response = pm.response.json();",
+							"pm.environment.set(\"user1_id\", response.id);",
+							"console.log(\"User 1 ID saved: \" + pm.environment.get(\"user1_id\"));"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -71,10 +84,15 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"ivan.petrov@practicummail.ru\",\r\n  \"name\": \"Иван Петров\"\r\n}",
+					"raw": "{\n  \"email\": \"ivan.petrov@practicummail.ru\",\n  \"name\": \"Иван Петров\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -82,12 +100,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/admin/users",
-					"protocol": "http",
+					"raw": "{{base_url}}/admin/users",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"admin",
 						"users"
@@ -103,11 +119,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Сохраняем ID пользователя 2",
+							"var response = pm.response.json();",
+							"pm.environment.set(\"user2_id\", response.id);",
+							"console.log(\"User 2 ID saved: \" + pm.environment.get(\"user2_id\"));"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -116,10 +137,15 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"ivan2.petrov@practicummail.ru\",\r\n  \"name\": \"Иван Петров\"\r\n}",
+					"raw": "{\n  \"email\": \"ivan2.petrov@practicummail.ru\",\n  \"name\": \"Иван Петров\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -127,12 +153,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/admin/users",
-					"protocol": "http",
+					"raw": "{{base_url}}/admin/users",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"admin",
 						"users"
@@ -148,11 +172,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-							"    pm.response.to.have.status(201);  \r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
-							"});"
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {",
+							"    pm.response.to.have.status(201);  ",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Сохраняем ID события",
+							"var response = pm.response.json();",
+							"pm.environment.set(\"event_id\", response.id);",
+							"console.log(\"Event ID saved: \" + pm.environment.get(\"event_id\"));"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -161,10 +190,15 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"annotation\": \"Сплав на байдарках похож на полет.\",\r\n  \"category\": 1,\r\n  \"description\": \"Сплав на байдарках похож на полет. На спокойной воде — это парение. На бурной, порожистой — выполнение фигур высшего пилотажа. И то, и другое дарят чувство обновления, феерические эмоции, яркие впечатления.\",\r\n  \"eventDate\": \"2025-12-31 15:10:05\",\r\n  \"location\": {\r\n    \"lat\": 55.754167,\r\n    \"lon\": 37.62\r\n  },\r\n  \"title\": \"Сплав на байдарках\",\r\n  \"paid\": true,\r\n  \"participantLimit\": 10,\r\n  \"requestModeration\": false\r\n}",
+					"raw": "{\n  \"annotation\": \"Сплав на байдарках похож на полет.\",\n  \"category\": {{category_id}},\n  \"description\": \"Сплав на байдарках похож на полет. На спокойной воде — это парение. На бурной, порожистой — выполнение фигур высшего пилотажа. И то, и другое дарят чувство обновления, феерические эмоции, яркие впечатления.\",\n  \"eventDate\": \"2025-12-31 15:10:05\",\n  \"location\": {\n    \"lat\": 55.754167,\n    \"lon\": 37.62\n  },\n  \"title\": \"Сплав на байдарках\",\n  \"paid\": true,\n  \"participantLimit\": 10,\n  \"requestModeration\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -172,22 +206,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/:userId/events",
-					"protocol": "http",
+					"raw": "{{base_url}}/users/{{user1_id}}/events",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"users",
-						":userId",
+						"{{user1_id}}",
 						"events"
-					],
-					"variable": [
-						{
-							"key": "userId",
-							"value": "1"
-						}
 					]
 				}
 			},
@@ -200,10 +226,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-							"    pm.response.to.be.ok;    \r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json;\r",
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+							"    pm.response.to.be.ok;    ",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
 							"});"
 						],
 						"type": "text/javascript",
@@ -213,10 +239,15 @@
 			],
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}",
+					"raw": "{\n    \"stateAction\": \"PUBLISH_EVENT\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -224,22 +255,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/admin/events/:eventId",
-					"protocol": "http",
+					"raw": "{{base_url}}/admin/events/{{event_id}}",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"admin",
 						"events",
-						":eventId"
-					],
-					"variable": [
-						{
-							"key": "eventId",
-							"value": "1"
-						}
+						"{{event_id}}"
 					]
 				}
 			},
@@ -249,31 +272,20 @@
 			"name": "Добавление лайка на событие",
 			"event": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				},
-				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-							"    pm.response.to.be.ok;  \r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json; \r",
-							"});\r",
-							"\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Рейтинг события должен измениться\", function () {\r",
-							"    pm.expect(response.eventRating).to.equal(1, 'Рейтинг события должен был увеличиться на 1');\r",
-							"});\r",
-							""
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+							"    pm.response.to.be.ok;  ",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json; ",
+							"});",
+							"",
+							"var response = pm.response.json();",
+							"",
+							"pm.test(\"Рейтинг события должен измениться\", function () {",
+							"    pm.expect(response.eventRating).to.equal(1, 'Рейтинг события должен был увеличиться на 1');",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -297,33 +309,17 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/:userId/events/:eventId/like/:likedUserId",
-					"protocol": "http",
+					"raw": "{{base_url}}/users/{{user1_id}}/events/{{event_id}}/like/{{user2_id}}",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"users",
-						":userId",
+						"{{user1_id}}",
 						"events",
-						":eventId",
+						"{{event_id}}",
 						"like",
-						":likedUserId"
-					],
-					"variable": [
-						{
-							"key": "userId",
-							"value": "1"
-						},
-						{
-							"key": "eventId",
-							"value": "1"
-						},
-						{
-							"key": "likedUserId",
-							"value": "2"
-						}
+						"{{user2_id}}"
 					]
 				}
 			},
@@ -336,16 +332,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-							"    pm.response.to.be.ok;  \r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json; \r",
-							"});\r",
-							"\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Рейтинг события должен измениться\", function () {\r",
-							"    pm.expect(response.eventRating).to.equal(-1, 'Рейтинг события должен был уменьшиться');\r",
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+							"    pm.response.to.be.ok;  ",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json; ",
+							"});",
+							"",
+							"var response = pm.response.json();",
+							"",
+							"pm.test(\"Рейтинг события должен измениться\", function () {",
+							"    pm.expect(response.eventRating).to.equal(-1, 'Рейтинг события должен был уменьшиться');",
 							"});"
 						],
 						"type": "text/javascript",
@@ -355,35 +351,28 @@
 			],
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://localhost:8080/users/:userId/events/:eventId/dislike/:dislikedUserId",
-					"protocol": "http",
+					"raw": "{{base_url}}/users/{{user1_id}}/events/{{event_id}}/dislike/{{user2_id}}",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"users",
-						":userId",
+						"{{user1_id}}",
 						"events",
-						":eventId",
+						"{{event_id}}",
 						"dislike",
-						":dislikedUserId"
-					],
-					"variable": [
-						{
-							"key": "userId",
-							"value": "1"
-						},
-						{
-							"key": "eventId",
-							"value": "1"
-						},
-						{
-							"key": "dislikedUserId",
-							"value": "2"
-						}
+						"{{user2_id}}"
 					]
 				}
 			},
@@ -396,16 +385,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-							"    pm.response.to.be.ok;  \r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json; \r",
-							"});\r",
-							"\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Рейтинг события должен измениться\", function () {\r",
-							"    pm.expect(response.eventRating).to.equal(0, 'Рейтинг события должен был увеличиться');\r",
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+							"    pm.response.to.be.ok;  ",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json; ",
+							"});",
+							"",
+							"var response = pm.response.json();",
+							"",
+							"pm.test(\"Рейтинг события должен измениться\", function () {",
+							"    pm.expect(response.eventRating).to.equal(0, 'Рейтинг события должен был увеличиться');",
 							"});"
 						],
 						"type": "text/javascript",
@@ -417,33 +406,17 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/:userId/events/:eventId/dislike/:dislikedUserId",
-					"protocol": "http",
+					"raw": "{{base_url}}/users/{{user1_id}}/events/{{event_id}}/dislike/{{user2_id}}",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"users",
-						":userId",
+						"{{user1_id}}",
 						"events",
-						":eventId",
+						"{{event_id}}",
 						"dislike",
-						":dislikedUserId"
-					],
-					"variable": [
-						{
-							"key": "userId",
-							"value": "1"
-						},
-						{
-							"key": "eventId",
-							"value": "1"
-						},
-						{
-							"key": "dislikedUserId",
-							"value": "2"
-						}
+						"{{user2_id}}"
 					]
 				}
 			},
@@ -453,29 +426,19 @@
 			"name": "Добавление лайка на событие повторно",
 			"event": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				},
-				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-							"    pm.response.to.be.ok;  \r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json; \r",
-							"});\r",
-							"\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Рейтинг события должен измениться\", function () {\r",
-							"    pm.expect(response.eventRating).to.equal(1, 'Рейтинг события должен был увеличиться');\r",
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+							"    pm.response.to.be.ok;  ",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json; ",
+							"});",
+							"",
+							"var response = pm.response.json();",
+							"",
+							"pm.test(\"Рейтинг события должен измениться\", function () {",
+							"    pm.expect(response.eventRating).to.equal(1, 'Рейтинг события должен был увеличиться');",
 							"});"
 						],
 						"type": "text/javascript",
@@ -500,33 +463,17 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/:userId/events/:eventId/like/:likedUserId",
-					"protocol": "http",
+					"raw": "{{base_url}}/users/{{user1_id}}/events/{{event_id}}/like/{{user2_id}}",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"users",
-						":userId",
+						"{{user1_id}}",
 						"events",
-						":eventId",
+						"{{event_id}}",
 						"like",
-						":likedUserId"
-					],
-					"variable": [
-						{
-							"key": "userId",
-							"value": "1"
-						},
-						{
-							"key": "eventId",
-							"value": "1"
-						},
-						{
-							"key": "likedUserId",
-							"value": "2"
-						}
+						"{{user2_id}}"
 					]
 				}
 			},
@@ -539,16 +486,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-							"    pm.response.to.be.ok;  \r",
-							"    pm.response.to.be.withBody;\r",
-							"    pm.response.to.be.json; \r",
-							"});\r",
-							"\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Рейтинг события должен измениться\", function () {\r",
-							"    pm.expect(response.eventRating).to.equal(0, 'Рейтинг события должен был уменьшиться');\r",
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {",
+							"    pm.response.to.be.ok;  ",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json; ",
+							"});",
+							"",
+							"var response = pm.response.json();",
+							"",
+							"pm.test(\"Рейтинг события должен измениться\", function () {",
+							"    pm.expect(response.eventRating).to.equal(0, 'Рейтинг события должен был уменьшиться');",
 							"});"
 						],
 						"type": "text/javascript",
@@ -560,33 +507,17 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/:userId/events/:eventId/like/:likedUserId",
-					"protocol": "http",
+					"raw": "{{base_url}}/users/{{user1_id}}/events/{{event_id}}/like/{{user2_id}}",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"users",
-						":userId",
+						"{{user1_id}}",
 						"events",
-						":eventId",
+						"{{event_id}}",
 						"like",
-						":likedUserId"
-					],
-					"variable": [
-						{
-							"key": "userId",
-							"value": "1"
-						},
-						{
-							"key": "eventId",
-							"value": "1"
-						},
-						{
-							"key": "likedUserId",
-							"value": "2"
-						}
+						"{{user2_id}}"
 					]
 				}
 			},
