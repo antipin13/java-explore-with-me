@@ -20,4 +20,7 @@ public class User {
     String name;
 
     String email;
+
+    @JoinColumn(name = "user_rating")
+    Long userRating;
 }

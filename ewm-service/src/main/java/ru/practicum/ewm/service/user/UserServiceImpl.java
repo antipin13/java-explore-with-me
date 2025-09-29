@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto saveUser(NewUserRequest request) {
         User newUser = userMapper.toUser(request);
+        newUser.setUserRating(0L);
 
         newUser = userRepository.save(newUser);
 
@@ -42,11 +43,9 @@ public class UserServiceImpl implements UserService {
                     .collect(Collectors.toList());
         }
 
-        List<UserDto> userList = userRepository.findByIdIn(ids, pageable).stream()
+        return userRepository.findByIdIn(ids, pageable).stream()
                 .map(userMapper::toUserDto)
                 .collect(Collectors.toList());
-
-        return userList;
     }
 
     @Override

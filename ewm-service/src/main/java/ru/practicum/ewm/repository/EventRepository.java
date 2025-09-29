@@ -38,7 +38,8 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             "AND e.eventDate BETWEEN :rangeStart AND :rangeEnd " +
             "AND e.state = 'PUBLISHED' " +
             "ORDER BY CASE WHEN :sort = 'EVENT_DATE' THEN e.eventDate END ASC, " +
-            "CASE WHEN :sort = 'VIEWS' THEN e.views END DESC")
+            "CASE WHEN :sort = 'VIEWS' THEN e.views END DESC, " +
+            "CASE WHEN :sort = 'RATINGS' THEN e.eventRating END DESC")
     List<Event> findEventsByCriteria(@Param("text") String text,
                                      @Param("categories") List<Long> categories,
                                      @Param("paid") Boolean paid,

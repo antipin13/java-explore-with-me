@@ -24,7 +24,7 @@ public class CompilationMapper {
 
     public Compilation toCompilation(NewCompilationRequest request) {
         Set<Event> events = request.getEvents().stream()
-                .map(eventId -> eventService.getEventOrThrow(eventId))
+                .map(eventService::getEventOrThrow)
                 .collect(Collectors.toSet());
 
         return Compilation.builder()
@@ -47,7 +47,7 @@ public class CompilationMapper {
     public Compilation updateCompilationFields(Compilation compilation, UpdateCompilationRequest request) {
         if (request.getEvents() != null) {
             Set<Event> events = request.getEvents().stream()
-                    .map(eventId -> eventService.getEventOrThrow(eventId))
+                    .map(eventService::getEventOrThrow)
                     .collect(Collectors.toSet());
 
             compilation.setEvents(events);

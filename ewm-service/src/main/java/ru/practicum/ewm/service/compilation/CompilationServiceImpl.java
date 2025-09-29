@@ -55,7 +55,7 @@ public class CompilationServiceImpl implements CompilationService {
         Compilation compilation = getCompilationOrThrow(id);
 
         if (!compilation.getEvents().isEmpty()) {
-            throw new ConflictException(String.format("Нельзя удалить подборку, если в ней есть события"));
+            throw new ConflictException(String.format("Нельзя удалить подборку с ID - %d, в ней есть события", id));
         }
 
         compilationRepository.delete(compilation);
@@ -82,6 +82,4 @@ public class CompilationServiceImpl implements CompilationService {
         return compilationRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Подборка с ID - %d не найдена", id)));
     }
-
-
 }

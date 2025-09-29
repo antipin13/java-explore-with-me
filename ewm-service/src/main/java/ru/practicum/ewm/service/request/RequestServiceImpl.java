@@ -141,8 +141,6 @@ public class RequestServiceImpl implements RequestService {
                     confirmedCount++;
                     confirmedRequests.add(requestMapper.toRequestDto(req));
                 } else {
-                    /*req.setStatus(RequestStatus.REJECTED);
-                    rejectedRequests.add(requestMapper.toRequestDto(req));*/
                     throw new ConflictException(String.format("Достигнут лимит по заявкам на событие с ID - %d", eventId));
 
                 }
