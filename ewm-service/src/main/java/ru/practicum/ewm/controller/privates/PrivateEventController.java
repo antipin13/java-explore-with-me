@@ -24,6 +24,8 @@ import java.util.List;
 public class PrivateEventController {
     final EventServiceImpl eventService;
     final RequestServiceImpl requestService;
+    final String likesUrl = "/{event-id}/likes/{liked-user-id}";
+    final String dislikesUrl = "/{event-id}/dislikes/{disliked-user-id}";
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -76,7 +78,7 @@ public class PrivateEventController {
         return requestService.updateStatusRequest(initiatorId, eventId, request);
     }
 
-    @PutMapping("/{event-id}/like/{liked-user-id}")
+    @PutMapping(value = likesUrl)
     @ResponseStatus(HttpStatus.OK)
     public EventDtoWithRating addLike(@PathVariable(name = "id") Long initiatorId,
                                       @PathVariable(name = "event-id") Long eventId,
@@ -85,7 +87,7 @@ public class PrivateEventController {
         return eventService.addLike(initiatorId, eventId, likedUser);
     }
 
-    @PutMapping("/{event-id}/dislike/{disliked-user-id}")
+    @PutMapping(value = dislikesUrl)
     @ResponseStatus(HttpStatus.OK)
     public EventDtoWithRating addDislike(@PathVariable(name = "id") Long initiatorId,
                                       @PathVariable(name = "event-id") Long eventId,
@@ -94,7 +96,7 @@ public class PrivateEventController {
         return eventService.addDislike(initiatorId, eventId, dislikedUser);
     }
 
-    @DeleteMapping("/{event-id}/like/{liked-user-id}")
+    @DeleteMapping(value = likesUrl)
     @ResponseStatus(HttpStatus.OK)
     public EventDtoWithRating removeLike(@PathVariable(name = "id") Long initiatorId,
                                       @PathVariable(name = "event-id") Long eventId,
@@ -103,7 +105,7 @@ public class PrivateEventController {
         return eventService.removeLike(initiatorId, eventId, likedUser);
     }
 
-    @DeleteMapping("/{event-id}/dislike/{disliked-user-id}")
+    @DeleteMapping(value = dislikesUrl)
     @ResponseStatus(HttpStatus.OK)
     public EventDtoWithRating removeDislike(@PathVariable(name = "id") Long initiatorId,
                                          @PathVariable(name = "event-id") Long eventId,

@@ -118,7 +118,7 @@ class EventServiceImplTest {
     }
 
     @Test
-    void testSaveEvent_WhenEventDateInPast_ShouldThrowException() {
+    void testSaveEventNotValidField() {
         newEventRequest.setEventDate(LocalDateTime.now().minusDays(1).format(formatter));
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(testUser));
@@ -295,7 +295,7 @@ class EventServiceImplTest {
 
 
     @Test
-    void testAddLike_WhenLikeAlreadyExists_ShouldThrowException() {
+    void testAddLikeConflictEx() {
         User likedUser = new User();
         likedUser.setId(2L);
 
@@ -333,7 +333,7 @@ class EventServiceImplTest {
     }
 
     @Test
-    void testRemoveLike_ShouldRemoveLikeSuccessfully() {
+    void testRemoveLike() {
         User likedUser = new User();
         likedUser.setId(2L);
 

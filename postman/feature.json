@@ -312,7 +312,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/{{userId1}}/events/{{eventId}}/like/{{userId2}}",
+					"raw": "http://localhost:8080/users/{{userId1}}/events/{{eventId}}/likes/{{userId2}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -323,7 +323,7 @@
 						"{{userId1}}",
 						"events",
 						"{{eventId}}",
-						"like",
+						"likes",
 						"{{userId2}}"
 					]
 				}
@@ -358,7 +358,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/{{userId1}}/events/{{eventId}}/dislike/{{userId2}}",
+					"raw": "http://localhost:8080/users/{{userId1}}/events/{{eventId}}/dislikes/{{userId2}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -369,7 +369,7 @@
 						"{{userId1}}",
 						"events",
 						"{{eventId}}",
-						"dislike",
+						"dislikes",
 						"{{userId2}}"
 					]
 				}
@@ -404,7 +404,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/{{userId1}}/events/{{eventId}}/dislike/{{userId2}}",
+					"raw": "http://localhost:8080/users/{{userId1}}/events/{{eventId}}/dislikes/{{userId2}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -415,7 +415,7 @@
 						"{{userId1}}",
 						"events",
 						"{{eventId}}",
-						"dislike",
+						"dislikes",
 						"{{userId2}}"
 					]
 				}
@@ -473,7 +473,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/{{userId1}}/events/{{eventId}}/like/{{userId2}}",
+					"raw": "http://localhost:8080/users/{{userId1}}/events/{{eventId}}/likes/{{userId2}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -484,7 +484,7 @@
 						"{{userId1}}",
 						"events",
 						"{{eventId}}",
-						"like",
+						"likes",
 						"{{userId2}}"
 					]
 				}
@@ -519,7 +519,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/{{userId1}}/events/{{eventId}}/like/{{userId2}}",
+					"raw": "http://localhost:8080/users/{{userId1}}/events/{{eventId}}/likes/{{userId2}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -530,7 +530,7 @@
 						"{{userId1}}",
 						"events",
 						"{{eventId}}",
-						"like",
+						"likes",
 						"{{userId2}}"
 					]
 				}
