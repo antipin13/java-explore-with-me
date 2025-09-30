@@ -174,4 +174,27 @@ public class EventMapper {
                 .views(event.getViews())
                 .build();
     }
+
+    public EventDtoWithRating toEventDtoWithRating(Event event) {
+        return EventDtoWithRating.builder()
+                .id(event.getId())
+                .annotation(event.getAnnotation())
+                .category(event.getCategory())
+                .confirmedRequests(event.getConfirmedRequests())
+                .createdOn(event.getCreatedOn().format(formatter))
+                .description(event.getDescription())
+                .eventDate(event.getEventDate().format(formatter))
+                .initiator(userMapper.toUserShortDto(event.getInitiator()))
+                .location(event.getLocation())
+                .paid(event.getPaid())
+                .participantLimit(event.getParticipantLimit())
+                .publishedOn(Optional.ofNullable(event.getPublishedOn())
+                        .map(date -> date.format(formatter)).orElse(null))
+                .requestModeration(event.getRequestModeration())
+                .state(event.getState().toString())
+                .title(event.getTitle())
+                .views(event.getViews())
+                .eventRating(event.getEventRating())
+                .build();
+    }
 }

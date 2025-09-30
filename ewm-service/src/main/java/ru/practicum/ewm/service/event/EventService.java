@@ -23,4 +23,12 @@ public interface EventService {
     List<EventShortDto> getEventsByCriteria(PublicEventSearchCriteria criteria, HttpServletRequest request);
 
     EventDto getEventById(Long id, HttpServletRequest request);
+
+    EventDtoWithRating addLike(Long initiatorId, Long eventId, Long likedUser);
+
+    EventDtoWithRating addDislike(Long initiatorId, Long eventId, Long dislikedUser);
+
+    EventDtoWithRating removeLike(Long initiatorId, Long eventId, Long likedUser);
+
+    EventDtoWithRating removeDislike(Long initiatorId, Long eventId, Long dislikedUser);
 }

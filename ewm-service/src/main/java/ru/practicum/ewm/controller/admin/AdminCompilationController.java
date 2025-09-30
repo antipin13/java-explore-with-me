@@ -23,6 +23,7 @@ public class AdminCompilationController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CompilationDto create(@RequestBody @Valid NewCompilationRequest request) {
+        log.info("Запрос на создание подборки - {}", request);
         return compilationService.saveCompilation(request);
     }
 
@@ -36,6 +37,7 @@ public class AdminCompilationController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remove(@PathVariable Long id) {
+        log.info("Запрос на удаление подборки с ID - {}", id);
         compilationService.removeCompilation(id);
     }
 }

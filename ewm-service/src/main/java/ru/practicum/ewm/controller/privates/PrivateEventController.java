@@ -7,10 +7,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.dto.event.EventDto;
-import ru.practicum.ewm.dto.event.EventShortDto;
-import ru.practicum.ewm.dto.event.NewEventRequest;
-import ru.practicum.ewm.dto.event.UserUpdateEventRequest;
+import ru.practicum.ewm.dto.event.*;
 import ru.practicum.ewm.dto.request.EventRequestStatusUpdateRequest;
 import ru.practicum.ewm.dto.request.EventRequestStatusUpdateResult;
 import ru.practicum.ewm.dto.request.RequestDto;
@@ -27,11 +24,13 @@ import java.util.List;
 public class PrivateEventController {
     final EventServiceImpl eventService;
     final RequestServiceImpl requestService;
+    final String likesUrl = "/{event-id}/likes/{liked-user-id}";
+    final String dislikesUrl = "/{event-id}/dislikes/{disliked-user-id}";
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public EventDto create(@RequestBody @Valid NewEventRequest request, @PathVariable(name = "id") Long userId) {
-        log.info("Запрос на добавление категории - {}", request);
+        log.info("Запрос на добавление события - {}", request);
         return eventService.saveEvent(request, userId);
     }
 
@@ -77,5 +76,41 @@ public class PrivateEventController {
                                                                @RequestBody EventRequestStatusUpdateRequest request) {
         log.info("Обновление статусов у заявок - {}", request);
         return requestService.updateStatusRequest(initiatorId, eventId, request);
+    }
+
+    @PutMapping(value = likesUrl)
+    @ResponseStatus(HttpStatus.OK)
+    public EventDtoWithRating addLike(@PathVariable(name = "id") Long initiatorId,
+                                      @PathVariable(name = "event-id") Long eventId,
+                                      @PathVariable(name = "liked-user-id") Long likedUser) {
+        log.info("Добавление лайка на мероприятие с ID - {} от пользователя с ID - {}", eventId, likedUser);
+        return eventService.addLike(initiatorId, eventId, likedUser);
+    }
+
+    @PutMapping(value = dislikesUrl)
+    @ResponseStatus(HttpStatus.OK)
+    public EventDtoWithRating addDislike(@PathVariable(name = "id") Long initiatorId,
+                                      @PathVariable(name = "event-id") Long eventId,
+                                      @PathVariable(name = "disliked-user-id") Long dislikedUser) {
+        log.info("Добавление дизлайка на мероприятие с ID - {} от пользователя с ID - {}", eventId, dislikedUser);
+        return eventService.addDislike(initiatorId, eventId, dislikedUser);
+    }
+
+    @DeleteMapping(value = likesUrl)
+    @ResponseStatus(HttpStatus.OK)
+    public EventDtoWithRating removeLike(@PathVariable(name = "id") Long initiatorId,
+                                      @PathVariable(name = "event-id") Long eventId,
+                                      @PathVariable(name = "liked-user-id") Long likedUser) {
+        log.info("Удаление лайка на мероприятии с ID - {} от пользователя с ID - {}", eventId, likedUser);
+        return eventService.removeLike(initiatorId, eventId, likedUser);
+    }
+
+    @DeleteMapping(value = dislikesUrl)
+    @ResponseStatus(HttpStatus.OK)
+    public EventDtoWithRating removeDislike(@PathVariable(name = "id") Long initiatorId,
+                                         @PathVariable(name = "event-id") Long eventId,
+                                         @PathVariable(name = "disliked-user-id") Long dislikedUser) {
+        log.info("Удаление дизлайка на мероприятии с ID - {} от пользователя с ID - {}", eventId, dislikedUser);
+        return eventService.removeDislike(initiatorId, eventId, dislikedUser);
     }
 }

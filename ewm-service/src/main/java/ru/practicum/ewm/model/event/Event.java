@@ -61,4 +61,7 @@ public class Event {
 
     @ManyToMany(mappedBy = "events")
     Set<Compilation> collections = new HashSet<>();
+
+    @JoinColumn(name = "event_rating")
+    Long eventRating;
 }
